@@ -1,46 +1,78 @@
-import React from "react";
-import "./css/Home.css";
+import React, {useContext} from "react";
 import "./css/App.css";
+import Home from "./components/Home"
+import UserContext, {UserProvider} from './contexts/UserContext'
+import Cadastro from './components/forms/Cadastro';
+import Login from './components/forms/Login';
+
+
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Nav from "react-bootstrap/Nav";
 
 function App() {
   return (
-    <Router>
+  <UserProvider>
       <div className="App">
-        <div className="page container-fluid">
-          <div className="header row align-items-center">
-            <div className="col-lg-2 col" id="logo">
-              <img
-                alt="Logo do site"
-                src={`${process.env.PUBLIC_URL}/img/logo.svg`}
-              />
-            </div>
-            <div className="col-lg-10 col justify-content-end">
-              <h1>Login</h1>
-              <h1>Cadastrar</h1>
-            </div>
-          </div>
-          <div className="content row">
-            <div class="col-sm-8"> </div>
-            <div class="login-cadastro col-sm-4">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Special title treatment</h5>
-                  <p class="card-text">
-                    With supporting text below as a natural lead-in to
-                    additional content.
-                  </p>
-                  <a href="#" class="btn btn-primary">
-                    Go somewhere
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+          <Router>
+            <header>
+              <Container className="header">
+                <Row>
+                  <Col className="col" xs lg="2">
+                    <img
+                      id="logo"
+                      alt="logo do site"
+                      src={`${process.env.PUBLIC_URL}/img/logo.svg`}
+                    />
+                  </Col>
+                  <Col className="col" xs lg="auto">
+                    <Nav>
+                      <Nav.Item >
+                        <Nav.Link href="/" className="color-white" >Home</Nav.Link>
+                      </Nav.Item>
+                      <Nav.Item>
+                        <Nav.Link href="/contatos" className="color-white">Contato</Nav.Link>
+                      </Nav.Item>
+                    </Nav>
+                  </Col>
+                </Row>
+              </Container>
+            </header>
+            <main className="content text-center">
+              <Container>
+                <Row>
+                  <Col className="col" xs={9}>
+                    <Switch>
+                      <Route exact path="/">
+                        <Home />
+                      </Route>
+                      <Route path="/cadastrar"><Cadastro/></Route>
+                      <Route path="/entrar"><Login/></Route>
+                      <Route path="*">
+                        <div>Not Found 404</div>
+                      </Route>
+                    </Switch>
+                  </Col>
+                </Row>
+              </Container>
+            </main>
+            <footer>
+              <Container>
+                <Row className="d-flex align-items-end text-center">
+                  <Col className="col">Facilita © - Todos direitos reservados 2021</Col>
+                </Row>
+              </Container>
+            </footer>
+          </Router>
       </div>
-    </Router>
+  </UserProvider>
   );
 }
 
+
 export default App;
+
+
+             

@@ -7,3 +7,50 @@ html {
     padding: 0;
     margin: 0;
 }
+
+#logo {
+    display: flex;
+    width: 10vh;
+    max-width: 8rem;
+    min-width: 6rem;
+    align-items: center;
+    justify-content: center;
+}
+
+#logo img {
+    width: 100%;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    vertical-align: middle;
+    text-align: center;
+    width: 100vw;
+    height: 12.5vh;
+    min-height: 6rem;
+    background-color: #e6e8e6;
+    /* e6e8e6 */
+    /* B7C0EE */
+    /* a7cced */
+    /* 82a0bc */
+}
+
+
+header {
+    color: #2c2c2c;
+    display: flex;
+    height: 100%;
+    text-align: center;
+    justify-content: center;
+    align-items: flex-end;
+    line-height: 24px;
+
+}
+
+header {
+    font-size: 1.6rem;
+    font-weight: 400;
+    padding: 0px 10px;
+}
