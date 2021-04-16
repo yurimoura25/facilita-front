@@ -1,18 +1,17 @@
-import React, {useContext} from "react";
+import React, {useContext, useState} from "react";
 import "./css/App.css";
 import Home from "./components/Home"
-import UserContext, {UserProvider} from './contexts/UserContext'
+import {UserProvider} from './contexts/UserContext'
 import Cadastro from './components/forms/Cadastro';
 import Login from './components/forms/Login';
 
 
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Nav from "react-bootstrap/Nav";
+import {Container, Button, Row, Col, Nav} from 'react-bootstrap'
 
 function App() {
+  const [logInModal, setLogInModal] = useState(false);
+
   return (
   <UserProvider>
       <div className="App">
@@ -33,7 +32,7 @@ function App() {
                         <Nav.Link href="/" >Home</Nav.Link>
                       </Nav.Item>
                       <Nav.Item>
-                        <Nav.Link href="/login">Log in</Nav.Link>
+                        <Button variant="dark" onClick={() => {setLogInModal(true)}}>Log in</Button>
                       </Nav.Item>
                     </Nav>
                   </Col>
@@ -41,6 +40,7 @@ function App() {
               </Container>
             </header>
             <main className="content text-center">
+              <Login show={logInModal} onHide={() => setLogInModal(false)}/>
               <Container>
                 <Row>
                   <Col className="col" xs={12}>
@@ -49,7 +49,6 @@ function App() {
                         <Home />
                       </Route>
                       <Route path="/cadastrar"><Cadastro/></Route>
-                      <Route path="/login"><Login/></Route>
                       <Route path="*">
                         <div>Not Found 404</div>
                       </Route>
@@ -60,7 +59,7 @@ function App() {
             </main>
             <footer>
               <Container>
-                <Row className="d-flex align-items-end text-center">
+                <Row className="align-items-end text-center">
                   <Col className="col">Facilita © - Todos direitos reservados 2021</Col>
                 </Row>
               </Container>
