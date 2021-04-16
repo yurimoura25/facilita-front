@@ -30,10 +30,10 @@ function App() {
                   <Col className="col" xs lg="auto">
                     <Nav>
                       <Nav.Item >
-                        <Nav.Link href="/" className="color-white" >Home</Nav.Link>
+                        <Nav.Link href="/" >Home</Nav.Link>
                       </Nav.Item>
                       <Nav.Item>
-                        <Nav.Link href="/contatos" className="color-white">Contato</Nav.Link>
+                        <Nav.Link href="/login">Log in</Nav.Link>
                       </Nav.Item>
                     </Nav>
                   </Col>
@@ -43,13 +43,13 @@ function App() {
             <main className="content text-center">
               <Container>
                 <Row>
-                  <Col className="col" xs={9}>
+                  <Col className="col" xs={12}>
                     <Switch>
                       <Route exact path="/">
                         <Home />
                       </Route>
                       <Route path="/cadastrar"><Cadastro/></Route>
-                      <Route path="/entrar"><Login/></Route>
+                      <Route path="/login"><Login/></Route>
                       <Route path="*">
                         <div>Not Found 404</div>
                       </Route>

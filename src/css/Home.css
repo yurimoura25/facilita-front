@@ -1,48 +1,36 @@
 
-
-.content {
+.home {
     display: flex;
-    padding: 0;
-    margin: 0;
-    width: 100vw;
-    height: 80vh;
-    background-color:#fefefe;
-}
-
-.content .card {
-    height: 80%;
-    width: 40%;
-    margin: 20px;
-    border-radius: 10px;
-    text-align: center;
-    line-height: 4rem;
-}
-
-.login-cadastro {
-    height: 100%;
-    display: flex;
-    justify-content: center;
     align-items: center;
+    width: 100%;
+    height: 60vh;
 }
+
+.home-container {
+    width: 600px !important;
+    height: 40%;
+    flex-direction: row;
+    display: flex;
+}
+
+.card {
+    margin: 0 0 0 20px;
+}
+
+.btn-cadastro {
+    font-size: 1rem !important;
+    margin-top: 20px !important;
+}
+
+.card-header {
+    font-size: 1.8rem;
+    font-weight: 300;
+}
+
 .btn {
     background-color: #2b2e4a !important;
     border:#2b2e4a !important;
     margin: 0 5px;
     width: 125px;
     height: 25px;
-}
-
-.card-body .row {
-    display: flex;
-    justify-content: center;
-    vertical-align: bottom;
-    height: 33.3%;
-}
-
-.buttons {
-    width: 100%;
-    height: auto;
-    display: flex;
-    justify-content: center;
-    vertical-align: bottom;
 }

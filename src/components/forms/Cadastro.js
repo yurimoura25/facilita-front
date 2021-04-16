@@ -4,7 +4,7 @@ import UserContext from '../../contexts/UserContext'
 
 function Cadastro() {
   const { userInfo } = useContext(UserContext);
-  const view = userInfo.type == 'ong'? (<OngForm/>) : (<UsuarioForm/>) 
+  const view = userInfo.type === 'ong'? (<OngForm/>) : (<UsuarioForm/>) 
 
   return (view);
 }

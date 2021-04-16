@@ -1,54 +1,45 @@
-import React, { useContext } from 'react';
-import '../css/Home.css'
-import {Link} from 'react-router-dom'
-import UserContext from '../contexts/UserContext'
+import React, { useContext } from "react";
+import "../css/Home.css";
+import { Link } from "react-router-dom";
+import UserContext from "../contexts/UserContext";
+import {Card, Button, Container, CardGroup} from 'react-bootstrap'
 
 function Home() {
-    const { setOng, setUsuario } = useContext(UserContext);
+  const { setOng, setUsuario } = useContext(UserContext);
 
-    return(
-        <div className="home">
-            <div className="card">
-                <div className="card-body">
-                <h5 className="card-title">Usuário</h5>
-                <p className="card-text">
-                    Cadastra-se e ajude a facilitar a vida de pessoas.
-                </p>
-                <div className="buttons">
-                <Link to="/entrar" >
-                    <button className="btn btn-primary" onClick= {() => setUsuario()}>
-                    Entrar
-                    </button>
+  return (
+    <div className="home">
+        <Container className="home-container">
+        <CardGroup>
+            <Card>
+                <Card.Header>Usuário</Card.Header>
+                <Card.Body>
+                    <Card.Title>Ajude instituições</Card.Title>
+                    <Card.Text>
+                        Ajude a levar esperança para as pessoas em sua região, doe usando este website.
+                    </Card.Text>
+                    <Link to="/cadastrar">
+                        <Button variant="primary" className="btn-cadastro" onClick={() => setUsuario()}>Cadastre-se</Button>
+                    </Link>
+                </Card.Body>
+            </Card>
+            <Card>
+                <Card.Header>Instituição</Card.Header>
+                <Card.Body>
+                <Card.Title>Special title treatment</Card.Title>
+                <Card.Text>
+                    With supporting text below as a natural lead-in to additional
+                    content.
+                </Card.Text>
+                <Link to="/cadastrar">
+                        <Button variant="primary" className="btn-cadastro" onClick={() => setOng()}>Cadastre-se</Button>
                 </Link>
-                <Link to="/cadastrar" >
-                    <button className="btn btn-primary" onClick={() => setUsuario()}>
-                    Cadastrar
-                    </button>
-                </Link>
-                </div>
-                </div>
-            </div>
-            <div className="card">
-                <div className="card-body">
-                <h5 className="card-title">ONG</h5>
-                <p className="card-text">
-                    Cadastra-se e ajude a facilitar a vida de pessoas.
-                </p>
-                <div className="buttons">
-                <Link to="/entrar" >
-                    <button className="btn btn-primary"onClick={() => setOng()} >
-                    Entrar
-                    </button>
-                </Link>
-                <Link to="/cadastrar" >
-                    <button className="btn btn-primary" onClick={() => setOng()} >
-                    Cadastrar
-                    </button>
-                </Link>
-                </div>
-                </div>
-            </div>
-        </div>)
+                </Card.Body>
+            </Card>
+        </CardGroup>
+        </Container>
+    </div>
+  );
 }
 
 export default Home;

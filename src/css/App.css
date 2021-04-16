@@ -54,3 +54,10 @@ header {
     font-weight: 400;
     padding: 0px 10px;
 }
+
+.login-cadastro {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
