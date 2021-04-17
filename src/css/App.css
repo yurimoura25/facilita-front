@@ -10,27 +10,26 @@ html {
 
 #logo {
     display: flex;
-    width: 10vh;
-    max-width: 8rem;
-    min-width: 6rem;
     align-items: center;
     justify-content: center;
+    max-width: 6vw;
+    max-height: 6vh;
+    margin-left: 1.5vw;
+
 }
 
-#logo img {
-    width: 100%;
-}
-
-header {
+.header {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     vertical-align: middle;
     text-align: center;
     width: 100vw;
-    height: 12.5vh;
-    min-height: 6rem;
-    background-color: #e6e8e6;
+    height: 7vh;
+    background-color: #2b2e4a;
+    color: #2c2c2c !important;
+    margin:0%;
+    padding:0%;
     /* e6e8e6 */
     /* B7C0EE */
     /* a7cced */
@@ -39,21 +38,9 @@ header {
 
 
 header {
-    color: #2c2c2c;
-    display: flex;
-    height: 100%;
-    text-align: center;
-    justify-content: center;
-    align-items: flex-end;
-    line-height: 24px;
-
+    font-size: 1.2rem;
 }
 
-header {
-    font-size: 1.6rem;
-    font-weight: 400;
-    padding: 0px 10px;
-}
 
 .login-cadastro {
     height: 100%;
@@ -61,3 +48,80 @@ header {
     justify-content: center;
     align-items: center;
 }
+
+.nav-item{
+    display:flex;
+    align-items: center;
+}
+
+.nav-item .nav-button-item{
+    background-color: #E84545;
+    color:#2B2E4A;
+    border-color:#E84545;
+    outline: none !important;
+    margin-right: 1vw;
+    border-radius: 0.6rem;
+    border-style: solid;
+    border-width: 0.2rem;
+    width: 4vw;
+    height: 4vh;
+}
+
+.nav-item .nav-button-item button{
+    margin-top: 0.7vh;
+}
+
+.nav-item .nav-button-item:hover{
+    border-color:#E84545;
+    background-color: #2B2E4A!important;
+    color:#E84545 !important;
+    outline: none !important;
+}
+
+.nav-item .nav-button-item:focus{
+    background-color: #E84545;
+    color:#2B2E4A;
+    border-color:#E84545 !important;
+    outline:#E84545;
+    box-shadow:none;
+
+}
+
+
+.nav-item .nav-button-item:c{
+
+    border-color:#E84545 !important;
+
+}
+
+
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 100vw !important;
+    height: 90vh;
+    margin: 0;
+    padding: 0 !important;
+}
+
+main {
+    width: 100vw;
+    height: 90vh;
+}
+
+
+footer {    
+    position: absolute;
+    bottom: 0;
+    background-color: #2B2E4A;
+    color: #fff;
+    border-top: 1px solid #ebebeb;
+    margin: 1rem 0 0 0;
+    padding-bottom: 1rem;
+    width: 100vw;
+    height: 3vw;
+}
+
+
+
