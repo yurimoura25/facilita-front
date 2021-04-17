@@ -7,8 +7,11 @@ import '../../css/Cadastro.css';
 
 function RedirectToModal(props) {
   const {userInfo} = useContext(UserContext);
-  return(userInfo.type === 'ong'? (<OngForm show={props.show} onHide={props.onHide}/>) : (<UsuarioForm show={props.show} onHide={props.onHide}/>))
+  return(userInfo.type === 'ong'? 
+  (<OngForm show={props.show} onHide={props.onHide}/>) : 
+  (<UsuarioForm show={props.show} onHide={props.onHide}/>))
 }
+
 function Cadastro() {
   const { setOng, setUsuario } = useContext(UserContext);
   const [signUpModal, setSignUpModal] = useState(false);
@@ -19,8 +22,8 @@ function Cadastro() {
   return ( 
     <>
     <RedirectToModal  show={signUpModal} onHide={() => setSignUpModal(false)} />
-        <Card className="card-usuario">
-            <Card.Header>Usuário</Card.Header>
+        <Card className="card-cadastro">
+            <Card.Header className="card-header-cadastro">Usuário</Card.Header>
             <Card.Body>
                 <Card.Title>Ajude instituições</Card.Title>
                 <Card.Text>
@@ -30,8 +33,8 @@ function Cadastro() {
 
             </Card.Body>
         </Card>
-        <Card className="card-ong">
-            <Card.Header>Instituição</Card.Header>
+        <Card className="card-cadastro">
+            <Card.Header className="card-header-cadastro">Instituição</Card.Header>
             <Card.Body>
             <Card.Title>Receba ajuda para sua ONG</Card.Title>
             <Card.Text>
@@ -50,45 +53,71 @@ function UsuarioForm(props) {
     {...props}
     centered={true}
     aria-labelledby="contained-modal-title-vcenter"
+    className="modal-cadastro-usuario"
+    contentClassName="modal-content-cadastrar-usuario"
   >
-    <Modal.Header closeButton>
+    <Modal.Header className="modal-header-cadastro-usuario"closeButton>
       <Modal.Title id="contained-modal-title-vcenter" className="padding-0">
-        Usuário
-  
+        <img
+          id="logo-login"
+          alt="logo do site"
+          src={`${process.env.PUBLIC_URL}/img/logo.svg`}
+          style={{display: 'inline-block', whiteSpace: 'nowrap'}}
+        />
       </Modal.Title>
     </Modal.Header>
-    <Modal.Body className="show-grid padding-0">
+    <Modal.Body className="modal-body-cadastro-usuario show-grid padding-0">
       <Container>
         <Formik
         initialValues={{nome: "", sobrenome: "", cpf: "", email: '', password: ''}}
         >
           {({values, handleSubmit, isSubmitting}) => ( 
           <Form onSubmit={handleSubmit}>
-            <Row className="padding-0">
+            <h1 className="titulo-cadastro">Cadastro Usuário</h1>
+              <Form.Row className="padding-0">
+              <Col>
+                <Form.Group controlId="formBasicNome">
+                  <Form.Control type="text" placeholder="Nome"/>
+                  <ErrorMessage name="nome" component="div" />
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group controlId="formBasicSobrenome">
+                <Form.Control type="text" placeholder="Sobrenome"/>
+                <ErrorMessage name="sobrenome" component="div" />
+                </Form.Group>
+              </Col>
+            </Form.Row>
+            <Form.Row className="padding-0">
+              <Col xs={12} md={12}>
+                <Form.Group controlId="formBasicCPF">
+                  <Form.Control type="text" placeholder="CPF" />
+                  <ErrorMessage name="cpf" component="div" />
+                </Form.Group>
+              </Col>
+            </Form.Row>
+            <Form.Row className="padding-0">
               <Col xs={12} md={12}>
                 <Form.Group controlId="formBasicEmail">
-                  <Form.Label>Email</Form.Label>
-                  <Form.Control type="email" placeholder="Email" value={values.email}/>
+                  <Form.Control type="text" placeholder="Email" />
                   <ErrorMessage name="email" component="div" />
                 </Form.Group>
               </Col>
-            </Row>
-
-            <Row className="padding-0">
+            </Form.Row>
+            <Form.Row className="padding-0">
               <Col xs={12} md={12}>
                 <Form.Group controlId="formBasicPassword">
-                  <Form.Label>Password</Form.Label>
-                  <Form.Control type="password" placeholder="Password" value={values.password}/>
+                <Form.Control type="password" placeholder="Password" />
                 </Form.Group>
               </Col>
-            </Row>
-            <Row className="padding-0">
+            </Form.Row>
+            <Form.Row className="padding-0">
               <Col>
-                <Button variant="primary" type="submit" disabled={isSubmitting}>
+                <button className="cadastro-button" type="submit" disabled={isSubmitting}>
                 Sign up
-                </Button>
+                </button>
               </Col>
-            </Row>
+            </Form.Row>
           </Form>
           )}
         </Formik>
@@ -100,67 +129,76 @@ function UsuarioForm(props) {
 function OngForm(props) {
   return( 
     <Modal
+      className="modal-cadastro-ong"
+      contentClassName="modal-content-cadastrar-ong"
       {...props}
       centered={true}
       aria-labelledby="contained-modal-title-vcenter"
     >
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter" className="padding-0">
-          ONG
+      <Modal.Header closeButton className="modal-header-cadastro-ong">
+        <Modal.Title id="contained-modal-title-vcenter" className="modal-title-cadastro">
+        <img
+          id="logo-login"
+          alt="logo do site"
+          src={`${process.env.PUBLIC_URL}/img/logo.svg`}
+          style={{display: 'inline-block', whiteSpace: 'nowrap'}}
+        />
         </Modal.Title>
       </Modal.Header>
-      <Modal.Body className="show-grid padding-0">
+      <Modal.Body className="show-grid modal-body-cadastro-ong">
         <Container>
           <Formik
-          initialValues={{email: '', password: ''}}
+          initialValues={{nome: '', cnpj: '', email: '', password: ''}}
           >
             {({values, handleSubmit, isSubmitting}) => ( 
             <Form onSubmit={handleSubmit}>
-              <Row className="padding-0">
-                <Col xs={12} md={12}>
+              <h1 className="titulo-cadastro">Cadastro Ong</h1>
+              <Form.Row>
+                <Col>
                   <Form.Group controlId="formBasicName">
-                    <Form.Label>Nome</Form.Label>
-                    <Form.Control type="nome" placeholder="Nome" />
+                    <Form.Control type="nome" placeholder="Razão Social" />
                     <ErrorMessage name="nome" component="div" />
                   </Form.Group>
                 </Col>
-              </Row>
 
-              <Row className="padding-0">
-                <Col xs={12} md={12}>
-                  <Form.Group controlId="formBasicEmail">
-                    <Form.Label>Email</Form.Label>
-                    <Form.Control type="email" placeholder="Email" />
-                    <ErrorMessage name="email" component="div" />
-                  </Form.Group>
-                </Col>
-              </Row>
-
-              <Row className="padding-0">
-                <Col xs={12} md={12}>
+                <Col>
                   <Form.Group controlId="formBasicCNPJ">
-                    <Form.Label>CNPJ</Form.Label>
                     <Form.Control type="cnpj" placeholder="CNPJ" />
                     <ErrorMessage name="cnpj" component="div" />
                   </Form.Group>
                 </Col>
-              </Row>
-
-              <Row className="padding-0">
-                <Col xs={12} md={12}>
-                  <Form.Group controlId="formBasicSenha">
-                    <Form.Label>Senha</Form.Label>
-                    <Form.Control type="senha" placeholder="Senha" />
+                
+                </Form.Row>
+                <Form.Row>
+                
+                </Form.Row>
+                <Form.Row>
+                <Col>
+                  <Form.Group controlId="formBasicEmail">
+                    <Form.Control type="email" placeholder="Email" />
+                    <ErrorMessage name="email" component="div" />
                   </Form.Group>
                 </Col>
-              </Row>
-              <Row className="padding-0">
+              </Form.Row>
+              <Form.Row>
                 <Col>
-                  <Button variant="primary" type="submit" disabled={isSubmitting}>
-                    Sign up
-                  </Button>
+                  <Form.Group controlId="formBasicSenha">
+                    <Form.Control type="password" placeholder="Senha" />
+                  </Form.Group>
                 </Col>
-              </Row>
+
+              </Form.Row>
+
+              {/* <Row>
+                
+              </Row> */}
+              <Form.Row>
+                <Col>
+                  <button className="cadastro-button" type="submit" disabled={isSubmitting}>
+                    Sign up
+                  </button>
+                </Col>
+              </Form.Row>
             </Form>
             )}
           </Formik>

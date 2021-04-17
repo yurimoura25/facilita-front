@@ -94,6 +94,9 @@ header {
 
 }
 
+.container-content {
+    margin: 0;
+}
 
 .content {
     display: flex;
@@ -120,8 +123,12 @@ footer {
     margin: 1rem 0 0 0;
     padding-bottom: 1rem;
     width: 100vw;
-    height: 3vw;
+    height: 2vw;
 }
 
+footer{
+    font-size: 15px;
+    margin-top: 10px;
+}
 
 

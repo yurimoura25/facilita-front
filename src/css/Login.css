@@ -1,11 +1,8 @@
 .modal-content-login {
     background-color: #2B2E4A !important;
-    padding: 30px 20px;
     border-radius: 2rem !important;
-    width: 27vw;
-    height: 50vh;
+    height: 55vh;
     padding: 2vh 1.2vw;
-    
     
 }
 
@@ -26,6 +23,11 @@
 
 .modal-login .form-group{
     margin-top:3vh;
+}
+
+.titulo {
+    text-align: center;
+    color:#E84545 !important;
 }
 
 
@@ -60,6 +62,7 @@
 .signin-button:disabled {
     background-color: #2B2E4A;
     border-color: rgb(87, 91, 122);
+    
 }
 
 .close {

@@ -13,11 +13,11 @@ function Login(props) {
     >
       <Modal.Header className = "modal-header-login"closeButton>
         <Modal.Title id="contained-modal-title-vcenter" className="modal-title-login">
-        <img
-          id="logo-login"
-          alt="logo do site"
-          src={`${process.env.PUBLIC_URL}/img/logo.svg`}
-        />
+          <img
+           id="logo-login"
+            alt="logo do site"
+            src={`${process.env.PUBLIC_URL}/img/logo.svg`}
+          />
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className="show-grid modal-body-login">
@@ -27,6 +27,7 @@ function Login(props) {
           >
             {({values, handleSubmit, isSubmitting}) => ( 
             <Form onSubmit={handleSubmit}>
+              <h1 className="titulo">Login</h1>
               <Row className="padding-0">
                 <Col xs={12} md={12}>
                   <Form.Group controlId="formBasicEmail">

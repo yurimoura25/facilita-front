@@ -47,7 +47,7 @@ function App() {
           </header>
           <main className="text-center">
             <Login show={logInModal} onHide={() => setLogInModal(false)} />
-            <Container>
+            <Container className="container-content">
               <Row>
                 <Col className="col" xs={12} className="content">
                   <Switch>
