@@ -5,8 +5,8 @@ import { UserProvider } from "./contexts/UserContext";
 import Cadastro from "./components/forms/Cadastro";
 import Login from "./components/forms/Login";
 
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { Container, Button, Row, Col, Nav } from "react-bootstrap";
+import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
+import { Container, Row, Col, Nav } from "react-bootstrap";
 
 function App() {
   const [logInModal, setLogInModal] = useState(false);
@@ -49,7 +49,7 @@ function App() {
             <Login show={logInModal} onHide={() => setLogInModal(false)} />
             <Container className="container-content">
               <Row>
-                <Col className="col" xs={12} className="content">
+                <Col className="col content" xs={12}>
                   <Switch>
                     <Route exact path="/">
                       <Home />

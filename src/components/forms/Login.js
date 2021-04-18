@@ -1,5 +1,5 @@
-import { Button, Container, Col, Form, Modal, Row } from "react-bootstrap";
-import { Formik, ErrorMessage } from "formik";
+import { Container, Col, Form, Modal, Row } from "react-bootstrap";
+import { Formik, Field, ErrorMessage } from "formik";
 import "../../css/Login.css";
 
 function Login(props) {
@@ -31,8 +31,7 @@ function Login(props) {
               <Row className="padding-0">
                 <Col xs={12} md={12}>
                   <Form.Group controlId="formBasicEmail">
-                    {/* <Form.Label>Email</Form.Label> */}
-                    <Form.Control type="email" placeholder="Email" />
+                    <Field className="form-control" name="email"type="text" placeholder="Email"/> 
                     <ErrorMessage name="email" component="div" />
                   </Form.Group>
                 </Col>
@@ -41,8 +40,7 @@ function Login(props) {
               <Row className="padding-0">
                 <Col xs={12} md={12}>
                   <Form.Group controlId="formBasicPassword">
-                    {/* <Form.Label>Password</Form.Label> */}
-                    <Form.Control type="password" placeholder="Password" />
+                  <Field className="form-control" name="password" type="password" placeholder="Senha"/>
                   </Form.Group>
                 </Col>
               </Row>
