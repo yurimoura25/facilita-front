@@ -52,7 +52,8 @@
 
 .modal-content-cadastrar-ong{
     border-radius: 2rem !important;
-    height: 60vh;
+    min-height: 40rem;
+    height: 55vh;
     background: #2B2E4A !important;
     padding: 2vh 1.2vw;
 
@@ -140,6 +141,7 @@
 
 .modal-content-cadastrar-usuario{
     border-radius: 2rem !important;
+    min-height: 45rem;
     height: 64vh;
     background: #2B2E4A !important;
     padding: 2vh 1.2vw;

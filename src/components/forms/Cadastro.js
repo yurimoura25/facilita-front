@@ -6,6 +6,21 @@ import {Card} from 'react-bootstrap'
 import '../../css/Cadastro.css';
 import *  as Yup from 'yup';
 
+const defaultSchema = {
+  nome: Yup.string()
+  .matches(/^[a-z ]+$/i, 'Apenas letras')
+  .min(2, 'Muito curto')
+  .max(60, 'Muito longo')
+  .required('Obrigatório'),
+  email: Yup.string()
+  .email()
+  .max(60, 'Muito longo')
+  .required('Obrigatório'),
+  password: Yup.string()
+  .matches(/^(?=.{6,})/, 'Deve conter pelo menos 6 caracteres')
+  .required('Obrigatório')
+}
+
 function RedirectToModal(props) {
   const {userInfo} = useContext(UserContext);
   return(userInfo.type === 'ong'? 
@@ -50,28 +65,16 @@ function Cadastro() {
 
 function UsuarioForm(props) {
   const signUpSchema = Yup.object().shape({
-    nome: Yup.string()
-    .matches(/^[a-z]+$/, 'Apenas letras')
-    .min(2, 'Muito curto')
-    .max(60, 'Muito longo')
-    .required('Obrigatório'),
+    ...defaultSchema,
     sobrenome: Yup.string()
-    .matches(/^[a-z]+$/, 'Apenas letras')
+    .matches(/^[a-z]+$/i, 'Apenas letras')
     .min(2, 'Muito curto')
     .max(60, 'Muito longo')
     .required('Obrigatório'),
-    cpf: Yup.number()
+    cpf: Yup.string()
     .matches(/^[0-9]+$/, 'Apenas números')
     .min(11, 'Deve conter 11 dígitos')
     .max(11, 'Deve conter 11 dígitos')
-    .required('Obrigatório'),
-    email: Yup.string()
-    .email()
-    .max(60, 'Muito longo')
-    .required('Obrigatório'),
-    password: Yup.string()
-    .matches(/^(?=.{6,})/, 'Deve conter pelo menos 6 caracteres')
-    .required('Obrigatório')
 
   })
   return(    
@@ -115,7 +118,7 @@ function UsuarioForm(props) {
               </Col>
               <Col>
                 <Form.Group controlId="formBasicSobrenome">
-                <Field className="form-control" name="sobrenome "type="text" placeholder="Sobrenome"/>
+                <Field className="form-control" name="sobrenome"type="text" placeholder="Sobrenome"/>
                 <ErrorMessage className="error-message" name="sobrenome" component="div" />
                 </Form.Group>
               </Col>
@@ -165,23 +168,12 @@ function UsuarioForm(props) {
 
 function OngForm(props) {
   const signUpSchema = Yup.object().shape({
-    nome: Yup.string()
-    .matches(/^[a-z]+$/, 'Apenas letras')
-    .min(2, 'Muito curto')
-    .max(60, 'Muito longo')
-    .required('Obrigatório'),
+    ...defaultSchema,
     cnpj: Yup.string()
     .matches(/^[0-9]+$/, 'Apenas números')
     .min(14, 'Deve conter 14 dígitos')
     .max(14, 'Deve conter 14 dígitos')
     .required('Obrigatório'),
-    email: Yup.string()
-    .email()
-    .max(60, 'Muito longo')
-    .required('Obrigatório'),
-    password: Yup.string()
-    .matches(/^(?=.{6,})/, 'Deve conter pelo menos 6 caracteres')
-    .required('Obrigatório')
 
 
   })
