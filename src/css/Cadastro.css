@@ -52,7 +52,7 @@
 
 .modal-content-cadastrar-ong{
     border-radius: 2rem !important;
-    height: 55vh;
+    height: 60vh;
     background: #2B2E4A !important;
     padding: 2vh 1.2vw;
 
@@ -108,7 +108,7 @@
 
 .modal-content-cadastrar-ong{
     border-radius: 2rem !important;
-    height: 55vh;
+    height: 60vh;
     background: #2B2E4A !important;
     padding: 2vh 1.2vw;
 
@@ -144,5 +144,10 @@
     background: #2B2E4A !important;
     padding: 2vh 1.2vw;
 
+}
+
+.error-message {
+    color: #ffa5ae;
+    line-height: 1rem;
 }
 

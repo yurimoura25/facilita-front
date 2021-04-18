@@ -1,9 +1,10 @@
 import React, { useContext, useState } from "react";
 import UserContext from '../../contexts/UserContext'
-import {Modal, Form, Col, Container, Row, Button} from 'react-bootstrap'
-import {Formik, ErrorMessage} from 'formik'
+import {Modal, Form, Col, Container, Button} from 'react-bootstrap'
+import {Formik, Field, ErrorMessage} from 'formik'
 import {Card} from 'react-bootstrap'
 import '../../css/Cadastro.css';
+import *  as Yup from 'yup';
 
 function RedirectToModal(props) {
   const {userInfo} = useContext(UserContext);
@@ -48,6 +49,31 @@ function Cadastro() {
 }
 
 function UsuarioForm(props) {
+  const signUpSchema = Yup.object().shape({
+    nome: Yup.string()
+    .matches(/^[a-z]+$/, 'Apenas letras')
+    .min(2, 'Muito curto')
+    .max(60, 'Muito longo')
+    .required('Obrigatório'),
+    sobrenome: Yup.string()
+    .matches(/^[a-z]+$/, 'Apenas letras')
+    .min(2, 'Muito curto')
+    .max(60, 'Muito longo')
+    .required('Obrigatório'),
+    cpf: Yup.number()
+    .matches(/^[0-9]+$/, 'Apenas números')
+    .min(11, 'Deve conter 11 dígitos')
+    .max(11, 'Deve conter 11 dígitos')
+    .required('Obrigatório'),
+    email: Yup.string()
+    .email()
+    .max(60, 'Muito longo')
+    .required('Obrigatório'),
+    password: Yup.string()
+    .matches(/^(?=.{6,})/, 'Deve conter pelo menos 6 caracteres')
+    .required('Obrigatório')
+
+  })
   return(    
   <Modal
     {...props}
@@ -69,7 +95,13 @@ function UsuarioForm(props) {
     <Modal.Body className="modal-body-cadastro-usuario show-grid padding-0">
       <Container>
         <Formik
+        enableReinitialize
         initialValues={{nome: "", sobrenome: "", cpf: "", email: '', password: ''}}
+        validationSchema={signUpSchema}
+        onSubmit={values => {
+          // same shape as initial values
+          console.log(values);
+        }}
         >
           {({values, handleSubmit, isSubmitting}) => ( 
           <Form onSubmit={handleSubmit}>
@@ -77,37 +109,42 @@ function UsuarioForm(props) {
               <Form.Row className="padding-0">
               <Col>
                 <Form.Group controlId="formBasicNome">
-                  <Form.Control type="text" placeholder="Nome"/>
-                  <ErrorMessage name="nome" component="div" />
+                  <Field className="form-control" name="nome" type="text" placeholder="Nome"/>
+                  <ErrorMessage className="error-message" name="nome" component="div" />
                 </Form.Group>
               </Col>
               <Col>
                 <Form.Group controlId="formBasicSobrenome">
-                <Form.Control type="text" placeholder="Sobrenome"/>
-                <ErrorMessage name="sobrenome" component="div" />
+                <Field className="form-control" name="sobrenome "type="text" placeholder="Sobrenome"/>
+                <ErrorMessage className="error-message" name="sobrenome" component="div" />
                 </Form.Group>
               </Col>
             </Form.Row>
             <Form.Row className="padding-0">
               <Col xs={12} md={12}>
                 <Form.Group controlId="formBasicCPF">
-                  <Form.Control type="text" placeholder="CPF" />
-                  <ErrorMessage name="cpf" component="div" />
+                  <Field className="form-control"
+                  name="cpf" 
+                  type="text" 
+                  placeholder="CPF" 
+                  />
+                  <ErrorMessage className="error-message" name="cpf" component="div" />
                 </Form.Group>
               </Col>
             </Form.Row>
             <Form.Row className="padding-0">
               <Col xs={12} md={12}>
                 <Form.Group controlId="formBasicEmail">
-                  <Form.Control type="text" placeholder="Email" />
-                  <ErrorMessage name="email" component="div" />
+                  <Field className="form-control" name="email" type="text" placeholder="Email" />
+                  <ErrorMessage className="error-message" name="email" component="div" />
                 </Form.Group>
               </Col>
             </Form.Row>
             <Form.Row className="padding-0">
               <Col xs={12} md={12}>
                 <Form.Group controlId="formBasicPassword">
-                <Form.Control type="password" placeholder="Password" />
+                <Field className="form-control" name="password" type="password" placeholder="Senha" />
+                <ErrorMessage className="error-message" name="password" component="div" />
                 </Form.Group>
               </Col>
             </Form.Row>
@@ -127,6 +164,27 @@ function UsuarioForm(props) {
 }
 
 function OngForm(props) {
+  const signUpSchema = Yup.object().shape({
+    nome: Yup.string()
+    .matches(/^[a-z]+$/, 'Apenas letras')
+    .min(2, 'Muito curto')
+    .max(60, 'Muito longo')
+    .required('Obrigatório'),
+    cnpj: Yup.string()
+    .matches(/^[0-9]+$/, 'Apenas números')
+    .min(14, 'Deve conter 14 dígitos')
+    .max(14, 'Deve conter 14 dígitos')
+    .required('Obrigatório'),
+    email: Yup.string()
+    .email()
+    .max(60, 'Muito longo')
+    .required('Obrigatório'),
+    password: Yup.string()
+    .matches(/^(?=.{6,})/, 'Deve conter pelo menos 6 caracteres')
+    .required('Obrigatório')
+
+
+  })
   return( 
     <Modal
       className="modal-cadastro-ong"
@@ -149,6 +207,12 @@ function OngForm(props) {
         <Container>
           <Formik
           initialValues={{nome: '', cnpj: '', email: '', password: ''}}
+          validationSchema={signUpSchema}
+          enableReinitialize
+          onSubmit={values => {
+            // same shape as initial values
+            console.log(values);
+          }}
           >
             {({values, handleSubmit, isSubmitting}) => ( 
             <Form onSubmit={handleSubmit}>
@@ -156,15 +220,15 @@ function OngForm(props) {
               <Form.Row>
                 <Col>
                   <Form.Group controlId="formBasicName">
-                    <Form.Control type="nome" placeholder="Razão Social" />
-                    <ErrorMessage name="nome" component="div" />
+                    <Field className="form-control" name="nome" type="text" placeholder="Razão Social" />
+                    <ErrorMessage className="error-message" name="nome" component="div" />
                   </Form.Group>
                 </Col>
 
                 <Col>
                   <Form.Group controlId="formBasicCNPJ">
-                    <Form.Control type="cnpj" placeholder="CNPJ" />
-                    <ErrorMessage name="cnpj" component="div" />
+                    <Field className="form-control" name="cnpj" type="text" placeholder="CNPJ" />
+                    <ErrorMessage className="error-message" name="cnpj" component="div" />
                   </Form.Group>
                 </Col>
                 
@@ -175,15 +239,16 @@ function OngForm(props) {
                 <Form.Row>
                 <Col>
                   <Form.Group controlId="formBasicEmail">
-                    <Form.Control type="email" placeholder="Email" />
-                    <ErrorMessage name="email" component="div" />
+                    <Field className="form-control" name="email" type="email" placeholder="Email" />
+                    <ErrorMessage className="error-message" name="email" component="div" />
                   </Form.Group>
                 </Col>
               </Form.Row>
               <Form.Row>
                 <Col>
                   <Form.Group controlId="formBasicSenha">
-                    <Form.Control type="password" placeholder="Senha" />
+                    <Field className="form-control" name="password" type="password" placeholder="Senha" />
+                    <ErrorMessage className="error-message" name="password" component="div" />
                   </Form.Group>
                 </Col>
 
