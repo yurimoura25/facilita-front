@@ -7,6 +7,7 @@ import Login from "./components/forms/Login";
 
 import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import { Container, Row, Col, Nav } from "react-bootstrap";
+import OngList from "./components/list/OngList";
 
 function App() {
   const [logInModal, setLogInModal] = useState(false);
@@ -51,12 +52,9 @@ function App() {
               <Row>
                 <Col className="col content" xs={12}>
                   <Switch>
-                    <Route exact path="/">
-                      <Home />
-                    </Route>
-                    <Route path="/cadastrar">
-                      <Cadastro />
-                    </Route>
+                    <Route exact path="/" component={Home} />
+                    <Route path="/cadastrar"component={Cadastro}/>
+                    <Route path="/lista" component={OngList}/>
                     <Route path="*">
                       <div>Not Found 404</div>
                     </Route>

@@ -10,7 +10,7 @@ function Home() {
         Home
         <Carousel> 
           <Carousel.Item>
-          <img className="d-block w=100%"src='../../src/img/ban01.png'alt="Primeira imagem"/>
+          <img className="d-block w=100%"src='../img/ban01.png' alt="Primeira imagem"/>
           <Carousel.Caption>
             <h3>Primeira imagem</h3>
             <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
