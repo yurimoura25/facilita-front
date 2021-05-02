@@ -1,28 +1,27 @@
 #cadastro-tab-ongInfo {
-    width: 50%;
-    text-align: center;
-    font-size: 14px;
-    background: #2B2E4A;
-    color: white;
-    border-top: 0px;
-    border-left: 0px;
-    border-right: 1px solid #E84545;
-    border-bottom: 1px solid #E84545;
+	width: 50%;
+	text-align: center;
+	font-size: 14px;
+	background: var(--primary-color);
+	color: var(--secondary-color);
+	border-top: 0px;
+	border-left: 0px;
+	border-right: 1px solid var(--secondary-color);
+	border-bottom: 1px solid var(--secondary-color);
 }
 
-.cadastro-tab.active{
-    opacity:0.5;
+.cadastro-tab.active {
+	opacity: 0.5;
 }
 
 #cadastro-tab-endereco {
-    width: 50%;
-    text-align: center;
-    font-size: 14px;
-    background: #2B2E4A;
-    color: white;
-    border-top: 0px;
-    border-left: 0px;
-    border-right: 0px;
-    border-bottom: 1px solid #E84545;
-
+	width: 50%;
+	text-align: center;
+	font-size: 14px;
+	background: var(--primary-color);
+	color: var(--secondary-color);
+	border-top: 0px;
+	border-left: 0px;
+	border-right: 0px;
+	border-bottom: 1px solid var(--secondary-color);
 }

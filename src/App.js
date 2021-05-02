@@ -51,7 +51,7 @@ function App() {
 									<Switch>
 										<Route exact path="/" component={Home} />
 										<Route path="/cadastrar" component={Cadastro} />
-										<Route path="/mapa" component={MapPage} />
+										<Route path="/instituicoes" component={MapPage} />
 										<Route path="*">
 											<div>Not Found 404</div>
 										</Route>

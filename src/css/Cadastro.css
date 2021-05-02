@@ -1,146 +1,142 @@
-
 .cadastro {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    height: 91vh;
+	display: flex;
+	align-items: center;
+	width: 100%;
+	height: 91vh;
 }
 
 .cadastro-container {
-    width: 90rem !important;
-    height: 100%;
-    flex-direction: row;
-    display: flex;
+	width: 90rem !important;
+	height: 100%;
+	flex-direction: row;
+	display: flex;
 }
 
 .card-cadastro {
-    height: 100%;
-    width: 40rem;
-    max-height: 30vh;
-    margin-bottom: 10vh !important;
-    margin: 0 0 0 20px;
-    
+	height: 100%;
+	width: 40rem;
+	max-height: 30vh;
+	margin-bottom: 10vh !important;
+	margin: 0 0 0 20px;
 }
 
-.card{
-    border-radius:2rem !important;
+.card {
+	border-radius: 2rem !important;
 }
 
 .card-text {
-    font-size: 1.4rem;
+	font-size: 1.4rem;
 }
 
 .btn-cadastro {
-    background-color: #2b2e4a !important;
-    border:#2b2e4a !important;
-    margin: 0 5px;
-    width: 120px;
-    height: 40px;
-    font-size: 1.3rem !important;
-    margin-top: 10px !important;
-    border-radius: 1.3rem !important;
-    
-
+	background-color: var(--primary-color) !important;
+	border: 1px solid var(--primary-color) !important;
+	margin: 0 5px;
+	width: 120px;
+	height: 40px;
+	font-size: 1.3rem !important;
+	margin-top: 10px !important;
+	border-radius: 1.3rem !important;
 }
 .card-header-cadastro {
-    font-size: 1.8rem;
-    font-weight: 300;
-    background-color: #2b2e4a !important;
-    color: white;
-    border-radius: 2rem  2rem 0rem 0rem !important;
+	font-size: 1.8rem;
+	font-weight: 300;
+	background-color: var(--primary-color) !important;
+	color: white;
+	border-radius: 2rem 2rem 0rem 0rem !important;
 }
 
-.modal-content-cadastrar-ong{
-    border-radius: 2rem !important;
-    min-height: 40rem;
-    height: 65vh;
-    background: #2B2E4A !important;
-    padding: 2vh 1.2vw;
-
+.modal-content-cadastrar-ong {
+	border-radius: 2rem !important;
+	min-height: 40rem;
+	height: 65vh;
+	background: var(--primary-color) !important;
+	padding: 2vh 1.2vw;
 }
 
-.modal-header-cadastro-ong{
-    align-self: center;
-    border: none !important;
+.modal-header-cadastro-ong {
+	align-self: center;
+	border: none !important;
 }
 
-.modal-body-cadastro-ong{
-    border-top: 2px solid #E84545;
+.modal-body-cadastro-ong {
+	border-top: 2px solid var(--secondary-color);
 }
 
-.modal-content-cadastrar-ong .modal-body-cadastro-ong .form-group{
-    margin-top: 2vh;
+.modal-content-cadastrar-ong .modal-body-cadastro-ong .form-group {
+	margin-top: 2vh;
 }
 
-.modal-content-cadastrar-ong .modal-body-cadastro-ong .form-group .form-control{
-    background-color:whitesmoke;
-    border-radius: 1.3rem !important;
-    height: 5vh;
-    font-size: 20px;
-    text-align:center;
-    font-family: 'Roboto';
-    
+.modal-content-cadastrar-ong
+	.modal-body-cadastro-ong
+	.form-group
+	.form-control {
+	background-color: whitesmoke;
+	border-radius: 1.3rem !important;
+	height: 5vh;
+	font-size: 20px;
+	text-align: center;
+	font-family: "Roboto";
 }
 
 .cadastro-button {
-    border-radius: 2rem !important;
-    font-size: 1.4rem;
-    margin-top:3vh;
-    color: white !important;
-    background-color: #E84545;
-    border-radius: 0.3rem;
-    border-width: 0.1rem;
-    outline: none !important;
-    border-style: solid;
-    border-color:#E84545;
-    width: 100%;
-    height: 5vh;
+	border-radius: 2rem !important;
+	font-size: 1.4rem;
+	margin-top: 3vh;
+	color: var(--primary-color);
+	background-color: var(--secondary-color);
+	border-radius: 0.3rem;
+	border-width: 0.1rem;
+	outline: none !important;
+	border-style: solid;
+	border-color: var(--secondary-color);
+	width: 100%;
+	height: 5vh;
 }
 
-.titulo-cadastro{
-    text-align: center;
-    color:#E84545 !important;
+.titulo-cadastro {
+	text-align: center;
+	color: var(--secondary-color) !important;
 }
 
 .cadastro-button:disabled {
-    background-color: #EB605F;
+	background-color: #364246;
 }
 
-
-.modal-header-cadastro-usuario{
-    align-self: center;
-    border: none !important;
+.modal-header-cadastro-usuario {
+	align-self: center;
+	border: none !important;
 }
 
-.modal-body-cadastro-usuario{
-    border-top: 2px solid #E84545;
+.modal-body-cadastro-usuario {
+	border-top: 2px solid var(--secondary-color);
 }
 
-.modal-content-cadastrar-usuario .modal-body-cadastro-usuario .form-group{
-    margin-top: 2vh;
+.modal-content-cadastrar-usuario .modal-body-cadastro-usuario .form-group {
+	margin-top: 2vh;
 }
 
-.modal-content-cadastrar-usuario .modal-body-cadastro-usuario .form-group .form-control{
-    background-color:whitesmoke;
-    border-radius: 1.3rem !important;
-    height: 5vh;
-    font-size: 20px;
-    text-align:center;
-    font-family: 'Roboto';
-    
+.modal-content-cadastrar-usuario
+	.modal-body-cadastro-usuario
+	.form-group
+	.form-control {
+	background-color: whitesmoke;
+	border-radius: 1.3rem !important;
+	height: 5vh;
+	font-size: 20px;
+	text-align: center;
+	font-family: "Roboto";
 }
 
-.modal-content-cadastrar-usuario{
-    border-radius: 2rem !important;
-    min-height: 45rem;
-    height: 64vh;
-    background: #2B2E4A !important;
-    padding: 2vh 1.2vw;
-
+.modal-content-cadastrar-usuario {
+	border-radius: 2rem !important;
+	min-height: 45rem;
+	height: 64vh;
+	background: var(--primary-color) !important;
+	padding: 2vh 1.2vw;
 }
 
 .error-message {
-    color: #ffa5ae;
-    line-height: 1rem;
+	color: #dfeaff;
+	line-height: 1rem;
 }
-

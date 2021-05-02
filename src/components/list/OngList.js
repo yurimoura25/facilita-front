@@ -17,39 +17,15 @@ function OngList() {
 	}, []);
 
 	return (
-		<Container>
-			<Row>
-				<Col>
-					<h1>Lista de ONGs</h1>
-				</Col>
-			</Row>
-			<Row>
-				<Col>
-					<Table striped bordered hover>
-						<thead>
-							<tr>
-								<th>Id</th>
-								<th>CNPJ</th>
-								<th>Razão Social</th>
-								<th>Email</th>
-							</tr>
-						</thead>
-						<tbody>
-							{ongList.map((ong) => {
-								return (
-									<tr>
-										<td>{ong.id}</td>
-										<td>{ong.cnpj}</td>
-										<td>{ong.razaoSocial}</td>
-										<td>{ong.email}</td>
-									</tr>
-								);
-							})}
-						</tbody>
-					</Table>
-				</Col>
-			</Row>
-		</Container>
+		<ul className="ong-list">
+			{ongList.map((ong) => {
+				return (
+					<li className="ong-list-item">
+						{ong.cnpj} - {ong.razaoSocial} - {ong.email}
+					</li>
+				);
+			})}
+		</ul>
 	);
 }
 

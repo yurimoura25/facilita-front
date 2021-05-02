@@ -1,3 +1,46 @@
+#listInstituicao {
+	background-color: black;
+	color: white;
+	height: 90vh;
+	width: 25vw;
+}
+
+#listInstituicao .ong-list {
+	list-style: none;
+	padding: 0;
+	background: var(--primary-color);
+}
+
+#listInstituicao .ong-list .ong-list-item {
+	display: flex;
+	font-size: 1.2rem;
+	margin: 0;
+	height: 8vh;
+	border-radius: 1.5rem;
+	margin-top: 0.2rem;
+	border-bottom: 0.2vh solid var(--secondary-color);
+	border-left: 0.2vh solid var(--secondary-color);
+	border-right: 0.4vh solid var(--secondary-color);
+	align-items: center;
+	justify-content: center;
+}
+
+#listInstituicao .ong-list .ong-list-item:first-child {
+	border-top: 0.2vh solid var(--secondary-color);
+}
+
 .map {
-	height: 180px;
+	min-width: 70vw;
+	height: 90vh;
+}
+
+.mapPage {
+	width: 100%;
+	padding: 0 !important;
+	margin: 0 !important;
+}
+
+.pageInstituicoes {
+	display: flex;
+	width: 100%;
 }

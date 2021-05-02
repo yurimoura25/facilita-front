@@ -41,7 +41,7 @@ function Login(props) {
 						validationSchema={loginSchema}
 						onSubmit={(fields) => {
 							props.onHide();
-							history.push("/mapa");
+							history.push("/instituicoes");
 							console.log(fields);
 						}}
 					>

@@ -4,10 +4,14 @@ import { Container } from "react-bootstrap";
 
 function MapPage() {
 	return (
-		<Container>
-			<OngList />
-			<OngMap />
-		</Container>
+		<div className="pageInstituicoes">
+			<div id="listInstituicao">
+				<OngList></OngList>
+			</div>
+			<Container className="mapPage">
+				<OngMap />
+			</Container>
+		</div>
 	);
 }
 

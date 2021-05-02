@@ -77,7 +77,7 @@ function OngForm(props) {
 						enableReinitialize
 						onSubmit={(fields) => {
 							props.onHide();
-							history.push("/lista");
+							history.push("/instituicoes");
 						}}
 					>
 						{({ values, handleSubmit, isSubmitting }) => (
