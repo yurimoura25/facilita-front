@@ -118,7 +118,7 @@ function UsuarioForm(props) {
 									<Col xs={12} md={12}>
 										<Form.Group controlId="formBasicCPF">
 											<Field
-												className="form-control"
+												className="form-control cpf"
 												name="cpf"
 												type="text"
 												placeholder="CPF"

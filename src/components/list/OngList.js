@@ -1,27 +1,61 @@
-import { useEffect, useState } from "react";
-import { Container, Table, Row, Col } from "react-bootstrap";
-import OngService from "../../services/OngService";
+import { useEffect } from "react";
+import ongFilter from "../../redux/filters/OngFilter"; 
 
-function OngList() {
-	const [ongList, setOngList] = useState([]);
+import {connect} from "react-redux";
+
+import  {listarOngs, buscarOng} from "../../redux/actions/OngAction";
+
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMapMarkedAlt } from "@fortawesome/free-solid-svg-icons";
+
+function OngList(props) {
 
 	useEffect(() => {
-		OngService.listar()
-			.then((response) => {
-				console.log(response);
-				setOngList(response.data);
-			})
-			.catch((error) => {
-				console.log(`error: ${error}`);
-			});
+		props.listarOngs();
 	}, []);
 
 	return (
 		<ul className="ong-list">
-			{ongList.map((ong) => {
+			{props.ongLista.map((ong) => {
 				return (
 					<li className="ong-list-item">
-						{ong.cnpj} - {ong.razaoSocial} - {ong.email}
+						{ong.cnpj} - {ong.razaoSocial} - {ong.email} -{" "}
+						{
+							<FontAwesomeIcon
+								className="btn-focus"
+								onClick={() => {
+									if (
+										!(
+											props.position ==
+											{ lat: ong.latitude, lng: ong.longitude }
+										)
+									) {
+										props.setPosition({
+											lat: ong.latitude,
+											lng: ong.longitude,
+										});
+									}
+									props.setOngInfo({
+										detalhes: {
+											cnpj: ong.cnpj || null,
+											razaoSocial: ong.razaoSocial,
+											email: ong.email || null,
+										},
+										endereco: {
+											cep: "",
+											estado: "",
+											cidade: "",
+											bairro: "",
+											rua: "Rua dos MALOKA",
+											numero: "",
+											complemento: "",
+										},
+									});
+								}}
+								icon={faMapMarkedAlt}
+							/>
+						}
 					</li>
 				);
 			})}
@@ -29,4 +63,4 @@ function OngList() {
 	);
 }
 
-export default OngList;
+export default connect(ongFilter, {listarOngs, buscarOng}) (OngList); 

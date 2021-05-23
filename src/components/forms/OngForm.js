@@ -6,6 +6,16 @@ import "../../css/Endereco.css";
 import OngService from "../../services/OngService";
 import * as Yup from "yup";
 import { useHistory } from "react-router-dom";
+import {
+	MapContainer,
+	TileLayer,
+	Marker,
+	Popup,
+	useMapEvents,
+} from "react-leaflet";
+
+const accessToken =
+	"pk.eyJ1IjoieXVyaW0yNSIsImEiOiJja29hdW5oMGkwMnQ2Mm5vMnphZzM5cjVkIn0.6WmEOInxZooASiMB6AuP7w";
 
 const defaultSchema = {
 	nome: Yup.string()
@@ -27,11 +37,33 @@ const endereco = {
 	rua: "",
 	numero: "",
 	complemento: "",
+	latitude: "",
+	longitude: "",
 };
+
+//Localização
 
 function OngForm(props) {
 	const [key, setKey] = useState("ongInfo");
 	const history = useHistory();
+	const [position, setPosition] = useState({
+		lat: -16.689,
+		lng: -49.265,
+	});
+
+	function LocationMarker() {
+		const map = useMapEvents({
+			click(place) {
+				setPosition(place.latlng);
+				map.flyTo(place.latlng, map.getZoom());
+			},
+		});
+		return position === null ? null : (
+			<Marker position={position}>
+				<Popup>You are here</Popup>
+			</Marker>
+		);
+	}
 
 	const signUpSchema = Yup.object().shape({
 		...defaultSchema,
@@ -72,11 +104,13 @@ function OngForm(props) {
 							email: "",
 							password: "",
 							...endereco,
+							...position,
 						}}
 						validationSchema={signUpSchema}
 						enableReinitialize
 						onSubmit={(fields) => {
 							props.onHide();
+							console.log(fields);
 							history.push("/instituicoes");
 						}}
 					>
@@ -156,15 +190,13 @@ function OngForm(props) {
 											</Col>
 										</Form.Row>
 										<Form.Row>
-											<Col>
-												<button
-													className="cadastro-button"
-													onClick={() => setKey("endereco")}
-													type="button"
-												>
-													Cadastrar Endereço
-												</button>
-											</Col>
+											<button
+												className="cadastro-button"
+												onClick={() => setKey("endereco")}
+												type="button"
+											>
+												Cadastrar Endereço
+											</button>
 										</Form.Row>
 									</Tab>
 									<Tab
@@ -285,18 +317,85 @@ function OngForm(props) {
 												</Form.Group>
 											</Col>
 										</Form.Row>
+										<Form.Row>
+											<button
+												className="cadastro-button"
+												onClick={() => setKey("localizacao")}
+												type="button"
+											>
+												Marcar localização
+											</button>
+										</Form.Row>
+									</Tab>
+									{/* TAB - MAPA */}
+									<Tab
+										eventKey="localizacao"
+										title="Localização"
+										tabClassName="cadastro-tab"
+									>
+										<Form.Row>
+											<Col>
+												<Form.Group controlId="formBasicLat">
+													<Field
+														className="form-control"
+														name="lat"
+														type="text"
+														placeholder="latitude"
+														value={values.lat}
+													/>
+													<ErrorMessage
+														className="error-message"
+														name="lat"
+														component="div"
+													/>
+												</Form.Group>
+											</Col>
+											<Col>
+												<Form.Group controlId="formBasicLng">
+													<Field
+														className="form-control"
+														name="lng"
+														type="text"
+														placeholder="Longitude"
+														value={values.lng}
+													/>
+													<ErrorMessage
+														className="error-message"
+														name="lng"
+														component="div"
+													/>
+												</Form.Group>
+											</Col>
+										</Form.Row>
+										<Form.Row>
+											<MapContainer
+												className="localizacao-mapa"
+												center={{ lat: position.lat, lng: position.lng }}
+												zoom={10}
+												scrollWheelZoom={true}
+											>
+												<TileLayer
+													url="https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}"
+													accessToken={accessToken}
+													id="mapbox/streets-v11"
+												/>
+												<LocationMarker />
+											</MapContainer>
+										</Form.Row>
+										<Form.Row>
+											{" "}
+											<button
+												className="cadastro-button"
+												type="submit"
+												disabled={isSubmitting}
+											>
+												Sign up
+											</button>
+										</Form.Row>
 									</Tab>
 								</Tabs>
 								<Form.Row>
-									<Col>
-										<button
-											className="cadastro-button"
-											type="submit"
-											disabled={isSubmitting}
-										>
-											Sign up
-										</button>
-									</Col>
+									<Col></Col>
 								</Form.Row>
 							</Form>
 						)}

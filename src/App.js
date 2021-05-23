@@ -5,6 +5,8 @@ import { UserProvider } from "./contexts/UserContext";
 import Cadastro from "./components/forms/Cadastro";
 import Login from "./components/forms/Login";
 import MapPage from "./components/pages/MapPage";
+import {Provider} from 'react-redux'
+import store from "./redux/store"
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Container, Row, Col, Nav } from "react-bootstrap";
@@ -15,6 +17,7 @@ function App() {
 
 	return (
 		<UserProvider>
+		<Provider store={store}>
 			<div className="App">
 				<Router>
 					<header className="header">
@@ -71,6 +74,7 @@ function App() {
 					</footer>
 				</Router>
 			</div>
+		</Provider>
 		</UserProvider>
 	);
 }
