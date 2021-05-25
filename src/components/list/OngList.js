@@ -10,12 +10,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMapMarkedAlt } from "@fortawesome/free-solid-svg-icons";
 
 function OngList(props) {
-
 	useEffect(() => {
 		props.listarOngs();
 	}, []);
 
 	return (
+		<>
+		<input type="text" className="search-ong"/>
 		<ul className="ong-list">
 			{props.ongLista.map((ong) => {
 				return (
@@ -60,6 +61,7 @@ function OngList(props) {
 				);
 			})}
 		</ul>
+		</>
 	);
 }
 

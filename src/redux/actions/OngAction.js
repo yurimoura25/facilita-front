@@ -12,7 +12,7 @@ export function listarOngs() {
 		OngService.listar()
 			.then((response) => {
 				callback({
-					type: "ONG_LISTAR",
+					type: ONG_ACTIONS.LISTAR,
 					content: response.data,
 				});
 			})
@@ -24,7 +24,7 @@ export function buscarOng(id) {
 	return (callback) => {
 		OngService.buscarPeloId(id).then((response) => {
 			callback({
-				type: "ONG_BUSCAR",
+				type: ONG_ACTIONS.BUSCAR,
 				content: response.data,
 			});
 		});

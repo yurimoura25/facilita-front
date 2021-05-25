@@ -6,6 +6,7 @@ import Cadastro from "./components/forms/Cadastro";
 import Login from "./components/forms/Login";
 import MapPage from "./components/pages/MapPage";
 import {Provider} from 'react-redux'
+import OngPage from "./components/pages/OngPage"
 import store from "./redux/store"
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -55,6 +56,7 @@ function App() {
 										<Route exact path="/" component={Home} />
 										<Route path="/cadastrar" component={Cadastro} />
 										<Route path="/instituicoes" component={MapPage} />
+										<Route path="/instituicao/:id" component={OngPage} />
 										<Route path="*">
 											<div>Not Found 404</div>
 										</Route>

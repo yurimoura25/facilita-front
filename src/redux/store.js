@@ -7,7 +7,7 @@ const reducers = combineReducers({
     ongState: ongReducer
 })
 
-const localState = localStorage.getItem('facilitaState') ? JSON.parse(localStorage.getItem('facilitaState')) : {};
+const localState = localStorage.getItem('@facilitaState') ? JSON.parse(localStorage.getItem('@facilitaState')) : {};
 
 const store = createStore(
     reducers,
@@ -16,7 +16,7 @@ const store = createStore(
 );
 
 store.subscribe(function() {
-    localStorage.setItem('facilitaState', JSON.stringify(store.getState()));
+    localStorage.setItem('@facilitaState', JSON.stringify(store.getState()));
 })
 
 export default store;
