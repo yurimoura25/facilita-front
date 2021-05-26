@@ -5,7 +5,6 @@ const URL = "http://localhost:8080";
 const listar = () => {
 	return axios.get(`${URL}/instituicao`);
 };
-
 const buscarPeloId = (id) => {
 	if (id !== undefined) {
 		return axios.get(`${URL}/instituicao/` + id);

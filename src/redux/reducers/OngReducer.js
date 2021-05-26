@@ -18,7 +18,11 @@ function ongReducer(state = ongState, callback) {
                 ...state,
                 ongItem: callback.content,
             }
-        
+        case ONG_ACTIONS.SETITEM:
+            return {
+                ...state,
+                ongItem: callback.content,
+            }
         default: 
             return state;
 	}

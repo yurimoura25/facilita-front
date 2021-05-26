@@ -3,21 +3,16 @@ import { Modal, Form, Col, Container } from "react-bootstrap";
 import { Formik, Field, ErrorMessage } from "formik";
 import { useHistory } from "react-router-dom";
 
+//Redux
+import usuarioFilter from "../../redux/filters/UsuarioFilter"
+import {salvarUsuario} from "../../redux/actions/UsuarioAction"
+import {connect} from "react-redux";
+
+
 import "../../css/Cadastro.css";
 import "../../css/Endereco.css";
 import * as Yup from "yup";
 
-const defaultSchema = {
-	nome: Yup.string()
-		.matches(/^[a-z ]+$/i, "Apenas letras")
-		.min(2, "Muito curto")
-		.max(60, "Muito longo")
-		.required("Obrigatório"),
-	email: Yup.string().email().max(60, "Muito longo").required("Obrigatório"),
-	password: Yup.string()
-		.matches(/^(?=.{6,})/, "Deve conter pelo menos 6 caracteres")
-		.required("Obrigatório"),
-};
 
 const endereco = {
 	cep: "",
@@ -32,12 +27,15 @@ const endereco = {
 function UsuarioForm(props) {
 	const history = useHistory();
 	const signUpSchema = Yup.object().shape({
-		...defaultSchema,
-		sobrenome: Yup.string()
-			.matches(/^[a-z]+$/i, "Apenas letras")
-			.min(2, "Muito curto")
-			.max(60, "Muito longo")
-			.required("Obrigatório"),
+		nome: Yup.string()
+		.matches(/^[a-z ]+$/i, "Apenas letras")
+		.min(2, "Muito curto")
+		.max(60, "Muito longo")
+		.required("Obrigatório"),
+		email: Yup.string().email().max(60, "Muito longo").required("Obrigatório"),
+		senha: Yup.string()
+		.matches(/^(?=.{6,})/, "Deve conter pelo menos 6 caracteres")
+		.required("Obrigatório"),
 		cpf: Yup.string()
 			.matches(/^[0-9]+$/, "Apenas números")
 			.min(11, "Deve conter 11 dígitos")
@@ -70,11 +68,20 @@ function UsuarioForm(props) {
 							sobrenome: "",
 							cpf: "",
 							email: "",
-							password: "",
+							senha: "",
 						}}
 						validationSchema={signUpSchema}
 						onSubmit={(fields) => {
 							props.onHide();
+							props.salvarUsuario({
+								instituicao: {
+									nome: fields.nome.concat("" + fields.sobrenome),
+									cpf: fields.cpf,
+									email: fields.email,
+									senha: fields.senha
+								},
+								endereco: [{}]
+							});
 							history.push("/instituicoes");
 							console.log(fields);
 						}}
@@ -154,13 +161,13 @@ function UsuarioForm(props) {
 										<Form.Group controlId="formBasicPassword">
 											<Field
 												className="form-control"
-												name="password"
+												name="senha"
 												type="password"
 												placeholder="Senha"
 											/>
 											<ErrorMessage
 												className="error-message"
-												name="password"
+												name="senha"
 												component="div"
 											/>
 										</Form.Group>
@@ -186,4 +193,4 @@ function UsuarioForm(props) {
 	);
 }
 
-export default UsuarioForm;
+export default connect(usuarioFilter, {salvarUsuario}) (UsuarioForm); 
