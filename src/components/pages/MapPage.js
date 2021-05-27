@@ -4,8 +4,11 @@ import { Col, Container, Row } from "react-bootstrap";
 import L from "leaflet";
 import "../../css/OngMap.css";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMapMarker } from "@fortawesome/free-solid-svg-icons";
+import ongFilter from "../../redux/filters/OngFilter"; 
+
+import {connect} from "react-redux";
+
+import  {listarOngs, buscarOng} from "../../redux/actions/OngAction";
 
 const accessToken =
 	"pk.eyJ1IjoieXVyaW0yNSIsImEiOiJja25hc3d6aGcwZ3B4MndtaXV4ZDczOHJsIn0.MjJnTcARUriA_9tI-oQG7Q";
@@ -17,29 +20,16 @@ function getIcon(_iconSize) {
 	});
 }
 
-function MapPage() {
+function MapPage(props) {
 	const [position, setPosition] = useState({ lat: -11.689, lng: -44.265 });
-	const [ongInfo, setOngInfo] = useState({
-		detalhes: {
-			cnpj: "00.000.000/0001-91",
-			razaoSocial: "Sorriso Feliz",
-			email: "feliz@gmail.com",
-		},
-		endereco: {
-			cep: "",
-			estado: "",
-			cidade: "",
-			bairro: "",
-			rua: "Rua da Amizade",
-			numero: "",
-			complemento: "",
-		},
-	});
 
 	function OngMap(props) {
-		function LocationMarker() {
-			return props.position === null ? null : (
-				<Marker position={props.position} icon={getIcon(50)}>
+		function LocationMarker(props) {
+			console.log(props.ongItem);
+			return !props.ongItem.listEnderecos? 
+			 (<div> Esta ong não possui endereço cadastrado</div>) : (
+				props.ongItem.listEnderecos.map(endereco => (
+					<Marker position={{lat: endereco.latitude, lng: endereco.longitude}} icon={getIcon(50)}>
 					<Popup
 						className="ong-popup-detalhes"
 						keepInView={true}
@@ -48,11 +38,11 @@ function MapPage() {
 					>
 						{/* <Container className="detalhes-container"> */}
 						<Row>
-							<Col>{props.ongInfo.detalhes.razaoSocial}</Col>
-							<Col>{props.ongInfo.detalhes.cnpj}</Col>
+							<Col>{props.ongItem.razaoSocial}</Col>
+							<Col>{props.ongItem.cnpj}</Col>
 						</Row>
 						<Row>
-							<Col>{props.ongInfo.endereco.rua}</Col>
+							<Col>Rua: {endereco.rua} </Col>
 						</Row>
 						<Row>
 							<Col>
@@ -69,6 +59,7 @@ function MapPage() {
 						{/* </Container> */}
 					</Popup>
 				</Marker>
+				))
 			);
 		}
 		return (
@@ -83,7 +74,8 @@ function MapPage() {
 					accessToken={accessToken}
 					id="mapbox/streets-v11"
 				/>
-				<LocationMarker />
+				<LocationMarker ongItem={props.ongItem}/>
+				{/* {props.ongItem.listEnderecos? props.ongItem.listEnderecos : (<div> Esta ong não possui endereço cadastrado</div>)} */}
 			</MapContainer>
 		);
 	}
@@ -91,17 +83,16 @@ function MapPage() {
 	return (
 		<div className="pageInstituicoes">
 			<div id="listInstituicao">
-				<OngList setPosition={setPosition} setOngInfo={setOngInfo} />
+				<OngList setPosition={setPosition} />
 			</div>
 			<Container className="mapPage">
 				<OngMap
 					position={position}
 					setPosition={setPosition}
-					ongInfo={ongInfo}
+					ongItem={props.ongItem}
 				/>
 			</Container>
 		</div>
 	);
 }
-
-export default MapPage;
+export default connect(ongFilter, {listarOngs, buscarOng}) (MapPage); 

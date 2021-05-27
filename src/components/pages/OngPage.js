@@ -15,8 +15,10 @@ import { faMapMarkedAlt } from "@fortawesome/free-solid-svg-icons";
 function OngPage(props) {
     const { id } = useParams();
     useEffect(() => {
-        if(!props.ongItem) {
+        try {
             props.buscarOng(id)
+        } catch (err) {
+            console.error(err);
         }
     }, [])
 
@@ -24,9 +26,9 @@ function OngPage(props) {
     <Container>
         <Row>
             <Col>Foto de perfil: {id} </Col>
-            <Col>Nome: </Col>
+            <Col>Nome: {props.ongItem.razaoSocial} </Col>
         </Row>
-        <Row>Endereco</Row>
+        <Row>Endereco: </Row>
     </Container>)
 }
 

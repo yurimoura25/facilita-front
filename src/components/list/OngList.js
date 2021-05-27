@@ -41,15 +41,7 @@ function OngList(props) {
 											cnpj: ong.cnpj || null,
 											razaoSocial: ong.razaoSocial,
 											email: ong.email || null,
-										endereco: {
-											cep: "",
-											estado: "",
-											cidade: "",
-											bairro: "",
-											rua: "Rua dos MALOKA",
-											numero: "",
-											complemento: "",
-										},
+											listEnderecos: ong.listEnderecos
 									});
 								}}
 								icon={faMapMarkedAlt}
