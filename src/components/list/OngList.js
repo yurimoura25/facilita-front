@@ -3,7 +3,7 @@ import ongFilter from "../../redux/filters/OngFilter";
 
 import {connect} from "react-redux";
 
-import  {listarOngs, buscarOng} from "../../redux/actions/OngAction";
+import  {listarOngs, buscarOng, setOngItem} from "../../redux/actions/OngAction";
 
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -29,20 +29,18 @@ function OngList(props) {
 									if (
 										!(
 											props.position ==
-											{ lat: ong.latitude, lng: ong.longitude }
+											{ lat: ong.listEnderecos[0]? ong.listEnderecos[0].latitude : null, 
+											  lng: ong.listEnderecos[0]? ong.listEnderecos[0].longitude: null }
 										)
 									) {
-										props.setPosition({
-											lat: ong.latitude,
-											lng: ong.longitude,
-										});
+										console.log(ong)
+										props.setPosition({ lat: ong.listEnderecos[0]? ong.listEnderecos[0].latitude : null,
+											lng: ong.listEnderecos[0]? ong.listEnderecos[0].longitude: null });
 									}
-									props.setOngInfo({
-										detalhes: {
+									props.setOngItem({
 											cnpj: ong.cnpj || null,
 											razaoSocial: ong.razaoSocial,
 											email: ong.email || null,
-										},
 										endereco: {
 											cep: "",
 											estado: "",
@@ -65,4 +63,4 @@ function OngList(props) {
 	);
 }
 
-export default connect(ongFilter, {listarOngs, buscarOng}) (OngList); 
+export default connect(ongFilter, {listarOngs, buscarOng, setOngItem}) (OngList); 
