@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useCallback, useMemo, useRef, useState } from "react";
 import { Modal, Form, Col, Container, Tabs, Tab } from "react-bootstrap";
 import { Formik, Field, ErrorMessage } from "formik";
 import "../../css/Cadastro.css";
 import "../../css/Endereco.css";
 import OngService from "../../services/OngService";
+import L from "leaflet";
 import * as Yup from "yup";
 import { useHistory } from "react-router-dom";
 import {
@@ -41,7 +42,47 @@ const endereco = {
 	longitude: "",
 };
 
+function getIcon(_iconSize) {
+	return L.icon({
+		iconUrl: `${process.env.PUBLIC_URL}/img/marker.svg`,
+		iconSize: _iconSize,
+	});
+}
+
 //Localização
+function DraggableMarker(props) {
+	const [draggable, setDraggable] = useState(true)
+	const markerRef = useRef(null)
+	const eventHandlers = useMemo(
+	  () => ({
+		dragend() {
+		  const marker = markerRef.current
+		  if (marker != null) {
+			props.setPosition(marker.getLatLng())
+		  }
+		},
+	  }),
+	  [],
+	)
+	const toggleDraggable = useCallback(() => {
+	  setDraggable((d) => !d)
+	}, [])
+  
+	return (
+	  <Marker
+		draggable={draggable}
+		eventHandlers={eventHandlers}
+		position={props.position}
+		icon={getIcon(50)}
+		ref={markerRef}>
+		<Popup minWidth={90}>
+			Posicione no local da instituição.
+		</Popup>
+	  </Marker>
+	)
+  }
+  
+
 
 function OngForm(props) {
 	const [key, setKey] = useState("ongInfo");
@@ -371,7 +412,7 @@ function OngForm(props) {
 											<MapContainer
 												className="localizacao-mapa"
 												center={{ lat: position.lat, lng: position.lng }}
-												zoom={10}
+												zoom={13}
 												scrollWheelZoom={true}
 											>
 												<TileLayer
@@ -379,7 +420,7 @@ function OngForm(props) {
 													accessToken={accessToken}
 													id="mapbox/streets-v11"
 												/>
-												<LocationMarker />
+												<DraggableMarker position={position} setPosition={setPosition} />
 											</MapContainer>
 										</Form.Row>
 										<Form.Row>
