@@ -37,7 +37,7 @@ function UsuarioForm(props) {
 		.matches(/^(?=.{6,})/, "Deve conter pelo menos 6 caracteres")
 		.required("Obrigatório"),
 		cpf: Yup.string()
-			.matches(/^[0-9]+$/, "Apenas números")
+			.matches(/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/, "Apenas números")
 			.min(11, "Deve conter 11 dígitos")
 			.max(11, "Deve conter 11 dígitos"),
 	});

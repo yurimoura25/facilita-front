@@ -109,7 +109,7 @@ function OngForm(props) {
 	const signUpSchema = Yup.object().shape({
 		...defaultSchema,
 		cnpj: Yup.string()
-			.matches(/^[0-9]+$/, "Apenas números")
+			.matches(/^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$/, "Apenas números")
 			.min(14, "Deve conter 14 dígitos")
 			.max(14, "Deve conter 14 dígitos")
 			.required("Obrigatório"),
