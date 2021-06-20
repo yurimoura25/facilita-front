@@ -36,8 +36,8 @@ function UsuarioForm(props) {
 			.required("Obrigatório"),
 		cpf: Yup.string()
 			.matches(/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/, "Apenas números")
-			.min(11, "Deve conter 11 dígitos")
-			.max(11, "Deve conter 11 dígitos"),
+			.min(14, "Deve conter 14 dígitos")
+			.max(14, "Deve conter 14 dígitos"),
 	});
 	return (
 		<Modal
@@ -73,9 +73,9 @@ function UsuarioForm(props) {
 							props.onHide();
 							props.salvarUsuario({
 								nome: fields.nome.concat(" " + fields.sobrenome).trim(),
-								cpf: fields.cpf,
-								email: fields.email,
-								senha: fields.senha,
+								cpf: fields.cpf.replaceAll(".", "").replace("-", "").trim(),
+								email: fields.email.trim(),
+								senha: fields.senha.trim(),
 							});
 							history.push("/instituicoes");
 							console.log(fields);

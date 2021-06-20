@@ -94,9 +94,9 @@ function OngForm(props) {
 
 	const signUpSchema = Yup.object().shape({
 		...defaultSchema,
-		cnpj: Yup.string()
-			.min(14, "Deve conter 14 dígitos")
-			.max(14, "Deve conter 14 dígitos")
+		cnpj: Yup.string().matches(/^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$/, "Apenas números")
+			.min(18, "Deve conter 18 dígitos")
+			.max(18, "Deve conter 18 dígitos")
 			.required("Obrigatório"),
 	});
 	return (
@@ -140,7 +140,7 @@ function OngForm(props) {
 							props.salvarOng({
 								instituicao: {
 									razaoSocial: fields.razaoSocial.trim(),
-									cnpj: fields.cnpj.trim(),
+									cnpj: fields.cnpj.trim().replaceAll(".", "").replace("/", "").replace("-", ""),
 									email: fields.email.trim(),
 									senha: fields.password.trim(),
 									ativo: true,
