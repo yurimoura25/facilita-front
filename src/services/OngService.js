@@ -12,10 +12,14 @@ const buscarPeloId = (id) => {
 };
 
 const salvar = (instituicao) => {
-	if (instituicao.id === undefined) {
-		return axios.post(`${URL}/instituicao/`, instituicao);
-	} else {
-		return axios.put(`${URL}/instituicao/${instituicao.id}`, instituicao);
+	try {
+		if (instituicao.id === undefined) {
+			return axios.post(`${URL}/instituicao/`, instituicao);
+		} else {
+			return axios.put(`${URL}/instituicao/${instituicao.id}`, instituicao);
+		}
+	} catch(error) {
+		console.log(error);
 	}
 };
 

@@ -36,8 +36,7 @@ function Cadastro() {
         <Card.Body>
           <Card.Title>Ajude instituições</Card.Title>
           <Card.Text>
-            Ajude a levar esperança para as pessoas em sua região, doe usando
-            este website.
+            Ajude a levar esperança para as pessoas em sua região. <br/> Doe.
           </Card.Text>
           <Button
             variant="primary"
@@ -56,7 +55,7 @@ function Cadastro() {
         <Card.Body>
           <Card.Title>Receba ajuda para sua ONG</Card.Title>
           <Card.Text>
-            Receba doações para ajudar a sua instituição através desse website
+            Receba doações para ajudar a sua <br/> instituição.
           </Card.Text>
           <Button
             variant="primary"

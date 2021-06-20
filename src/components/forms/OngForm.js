@@ -3,7 +3,14 @@ import { Modal, Form, Col, Container, Tabs, Tab } from "react-bootstrap";
 import { Formik, Field, ErrorMessage } from "formik";
 import "../../css/Cadastro.css";
 import "../../css/Endereco.css";
-import OngService from "../../services/OngService";
+
+import ongFilter from "../../redux/filters/OngFilter";
+
+import { connect } from "react-redux";
+import "../../css/OngList.css";
+
+import { salvarOng } from "../../redux/actions/OngAction";
+
 import L from "leaflet";
 import * as Yup from "yup";
 import { useHistory } from "react-router-dom";
@@ -51,38 +58,31 @@ function getIcon(_iconSize) {
 
 //Localização
 function DraggableMarker(props) {
-	const [draggable, setDraggable] = useState(true)
-	const markerRef = useRef(null)
+	const [draggable, setDraggable] = useState(true);
+	const markerRef = useRef(null);
 	const eventHandlers = useMemo(
-	  () => ({
-		dragend() {
-		  const marker = markerRef.current
-		  if (marker != null) {
-			props.setPosition(marker.getLatLng())
-		  }
-		},
-	  }),
-	  [],
-	)
-	const toggleDraggable = useCallback(() => {
-	  setDraggable((d) => !d)
-	}, [])
-  
+		() => ({
+			dragend() {
+				const marker = markerRef.current;
+				if (marker != null) {
+					props.setPosition(marker.getLatLng());
+				}
+			},
+		}),
+		[]
+	);
 	return (
-	  <Marker
-		draggable={draggable}
-		eventHandlers={eventHandlers}
-		position={props.position}
-		icon={getIcon(50)}
-		ref={markerRef}>
-		<Popup minWidth={90}>
-			Posicione no local da instituição.
-		</Popup>
-	  </Marker>
-	)
-  }
-  
-
+		<Marker
+			draggable={draggable}
+			eventHandlers={eventHandlers}
+			position={props.position}
+			icon={getIcon(50)}
+			ref={markerRef}
+		>
+			<Popup minWidth={90}>Posicione no local da instituição.</Popup>
+		</Marker>
+	);
+}
 
 function OngForm(props) {
 	const [key, setKey] = useState("ongInfo");
@@ -92,24 +92,9 @@ function OngForm(props) {
 		lng: -49.265,
 	});
 
-	function LocationMarker() {
-		const map = useMapEvents({
-			click(place) {
-				setPosition(place.latlng);
-				map.flyTo(place.latlng, map.getZoom());
-			},
-		});
-		return position === null ? null : (
-			<Marker position={position}>
-				<Popup>You are here</Popup>
-			</Marker>
-		);
-	}
-
 	const signUpSchema = Yup.object().shape({
 		...defaultSchema,
 		cnpj: Yup.string()
-			.matches(/^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$/, "Apenas números")
 			.min(14, "Deve conter 14 dígitos")
 			.max(14, "Deve conter 14 dígitos")
 			.required("Obrigatório"),
@@ -152,6 +137,28 @@ function OngForm(props) {
 						onSubmit={(fields) => {
 							props.onHide();
 							console.log(fields);
+							props.salvarOng({
+								instituicao: {
+									razaoSocial: fields.razaoSocial.trim(),
+									cnpj: fields.cnpj.trim(),
+									email: fields.email.trim(),
+									senha: fields.password.trim(),
+									ativo: true,
+								},
+								endereco: [
+									{
+										cep: fields.cep.trim(),
+										estado: fields.estado.trim(),
+										cidade: fields.cidade.trim(),
+										bairro: fields.bairro.trim(),
+										rua: fields.rua.trim(),
+										numero: fields.numero.trim(),
+										complemento: fields.complemento.trim(),
+										latitude: fields.lat.trim(),
+										longitude: fields.lng.trim(),
+									},
+								],
+							});
 							history.push("/instituicoes");
 						}}
 					>
@@ -420,7 +427,10 @@ function OngForm(props) {
 													accessToken={accessToken}
 													id="mapbox/streets-v11"
 												/>
-												<DraggableMarker position={position} setPosition={setPosition} />
+												<DraggableMarker
+													position={position}
+													setPosition={setPosition}
+												/>
 											</MapContainer>
 										</Form.Row>
 										<Form.Row>
@@ -447,4 +457,4 @@ function OngForm(props) {
 	);
 }
 
-export default OngForm;
+export default connect(ongFilter, { salvarOng })(OngForm);

@@ -6,6 +6,8 @@ import "../../css/OngMap.css";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import ongFilter from "../../redux/filters/OngFilter"; 
 
+import {Link} from 'react-router-dom';
+
 import {connect} from "react-redux";
 
 import  {listarOngs, buscarOng} from "../../redux/actions/OngAction";
@@ -25,7 +27,6 @@ function MapPage(props) {
 
 	function OngMap(props) {
 		function LocationMarker(props) {
-			console.log(props.ongItem);
 			return !props.ongItem.listEnderecos? 
 			 (<div> Esta ong não possui endereço cadastrado</div>) : (
 				props.ongItem.listEnderecos.map(endereco => (
@@ -46,9 +47,9 @@ function MapPage(props) {
 						</Row>
 						<Row>
 							<Col>
-								<button className="detalhes-button btn" type="button">
+								<Link to={`/instituicao/${props.ongItem.id}`} className="detalhes-button btn" type="button">
 									Detalhes
-								</button>
+								</Link>
 							</Col>
 							<Col>
 								<button className="doacao-button btn button" type="button">
@@ -75,7 +76,7 @@ function MapPage(props) {
 					id="mapbox/streets-v11"
 				/>
 				<LocationMarker ongItem={props.ongItem}/>
-				{/* {props.ongItem.listEnderecos? props.ongItem.listEnderecos : (<div> Esta ong não possui endereço cadastrado</div>)} */}
+				{props.ongItem.listEnderecos.length == 0? props.ongItem.listEnderecos : (<div> Esta ong não possui endereço cadastrado</div>)}
 			</MapContainer>
 		);
 	}

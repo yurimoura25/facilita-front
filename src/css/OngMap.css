@@ -1,6 +1,6 @@
 #listInstituicao {
-	background-color: darkgrey;
-	color: white;
+	background-color: white;
+	color: var(--primary-color);
 	height: 90vh;
 	width: 25vw;
 }
@@ -8,7 +8,7 @@
 #listInstituicao .ong-list {
 	list-style: none;
 	padding: 0;
-	background: var(--primary-color);
+	background-color: white;
 }
 
 #listInstituicao .ong-list .ong-list-item {
@@ -16,11 +16,8 @@
 	font-size: 1.2rem;
 	margin: 0;
 	height: 8vh;
-	border-radius: 1.5rem;
 	margin-top: 0.2rem;
 	border-bottom: 0.2vh solid var(--secondary-color);
-	border-left: 0.2vh solid var(--secondary-color);
-	border-right: 0.4vh solid var(--secondary-color);
 	align-items: center;
 	justify-content: center;
 }

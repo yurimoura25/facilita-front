@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import ongFilter from "../../redux/filters/OngFilter"; 
 
 import {connect} from "react-redux";
+import '../../css/OngList.css';
 
 import  {listarOngs, buscarOng, setOngItem} from "../../redux/actions/OngAction";
 
@@ -38,6 +39,7 @@ function OngList(props) {
 											lng: ong.listEnderecos[0]? ong.listEnderecos[0].longitude: null });
 									}
 									props.setOngItem({
+											id: ong.id,
 											cnpj: ong.cnpj || null,
 											razaoSocial: ong.razaoSocial,
 											email: ong.email || null,

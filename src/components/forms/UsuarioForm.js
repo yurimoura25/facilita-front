@@ -75,7 +75,7 @@ function UsuarioForm(props) {
 							props.onHide();
 							props.salvarUsuario({
 								instituicao: {
-									nome: fields.nome.concat("" + fields.sobrenome),
+									nome: fields.nome.concat(" " + fields.sobrenome).trim(),
 									cpf: fields.cpf,
 									email: fields.email,
 									senha: fields.senha
