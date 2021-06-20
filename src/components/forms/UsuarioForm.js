@@ -4,15 +4,13 @@ import { Formik, Field, ErrorMessage } from "formik";
 import { useHistory } from "react-router-dom";
 
 //Redux
-import usuarioFilter from "../../redux/filters/UsuarioFilter"
-import {salvarUsuario} from "../../redux/actions/UsuarioAction"
-import {connect} from "react-redux";
-
+import usuarioFilter from "../../redux/filters/UsuarioFilter";
+import { salvarUsuario } from "../../redux/actions/UsuarioAction";
+import { connect } from "react-redux";
 
 import "../../css/Cadastro.css";
 import "../../css/Endereco.css";
 import * as Yup from "yup";
-
 
 const endereco = {
 	cep: "",
@@ -28,14 +26,14 @@ function UsuarioForm(props) {
 	const history = useHistory();
 	const signUpSchema = Yup.object().shape({
 		nome: Yup.string()
-		.matches(/^[a-z ]+$/i, "Apenas letras")
-		.min(2, "Muito curto")
-		.max(60, "Muito longo")
-		.required("Obrigatório"),
+			.matches(/^[a-z ]+$/i, "Apenas letras")
+			.min(2, "Muito curto")
+			.max(60, "Muito longo")
+			.required("Obrigatório"),
 		email: Yup.string().email().max(60, "Muito longo").required("Obrigatório"),
 		senha: Yup.string()
-		.matches(/^(?=.{6,})/, "Deve conter pelo menos 6 caracteres")
-		.required("Obrigatório"),
+			.matches(/^(?=.{6,})/, "Deve conter pelo menos 6 caracteres")
+			.required("Obrigatório"),
 		cpf: Yup.string()
 			.matches(/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/, "Apenas números")
 			.min(11, "Deve conter 11 dígitos")
@@ -74,13 +72,10 @@ function UsuarioForm(props) {
 						onSubmit={(fields) => {
 							props.onHide();
 							props.salvarUsuario({
-								instituicao: {
-									nome: fields.nome.concat(" " + fields.sobrenome).trim(),
-									cpf: fields.cpf,
-									email: fields.email,
-									senha: fields.senha
-								},
-								endereco: [{}]
+								nome: fields.nome.concat(" " + fields.sobrenome).trim(),
+								cpf: fields.cpf,
+								email: fields.email,
+								senha: fields.senha,
 							});
 							history.push("/instituicoes");
 							console.log(fields);
@@ -117,7 +112,6 @@ function UsuarioForm(props) {
 												className="error-message"
 												name="sobrenome"
 												component="div"
-										
 											/>
 										</Form.Group>
 									</Col>
@@ -193,4 +187,4 @@ function UsuarioForm(props) {
 	);
 }
 
-export default connect(usuarioFilter, {salvarUsuario}) (UsuarioForm); 
+export default connect(usuarioFilter, { salvarUsuario })(UsuarioForm);
